@@ -1,7 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-import tensorflow as ts
 from keras import Sequential
 from keras import layers
 
@@ -31,12 +30,12 @@ train_features, train_target, test_features, test_target = train_test_split(feat
 model = Sequential([
     layers.Dense(100, activation='relu', input_shape=(train_features.shape[1],)),  # Hidden 1, 100 Neurons (not validated)
     layers.Dense(100),  # Hidden 2, 100 Neurons (not validated)
-    layers.Dense(1)  # Output, 1 Neuron is enough
+    layers.Dense(1)  # Output, 1 neuron for output layer is enough
 ])
 
 model.compile(optimizer="adam", loss="mse", metrics=["mae"])
 
 # Train the model
-model.fit(train_features, test_features, epochs=100, validation_split=0.3)
+model.fit(train_features, test_features, epochs=100, batch_size=100, validation_split=0.3)
 
 # TODO Validatae the model
